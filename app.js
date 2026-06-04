@@ -1,68 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. MOBILE MENU BURGER
+    // 1. МОБІЛЬНЕ МЕНЮ (БУРГЕР)
     const burgerBtn = document.getElementById("burgerBtn");
     const navMenu = document.getElementById("navMenu");
 
-    if(burgerBtn && navMenu) {
-        burgerBtn.addEventListener("click", () => navMenu.classList.toggle("active"));
+    if (burgerBtn && navMenu) {
+        burgerBtn.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+        });
+        // Закривати меню при кліку на будь-яке посилання
         document.querySelectorAll(".nav-menu a").forEach(link => {
             link.addEventListener("click", () => navMenu.classList.remove("active"));
         });
     }
 
-    // 2. FAQ ACCORDION
-    const accordionHeaders = document.querySelectorAll(".accordion-header");
-    accordionHeaders.forEach(header => {
-        header.addEventListener("click", () => {
-            const body = header.nextElementSibling;
-            const isVisible = body.style.display === "block";
-            
-            document.querySelectorAll(".accordion-body").forEach(b => b.style.display = "none");
-            document.querySelectorAll(".accordion-header span").forEach(s => s.textContent = "+");
+    // 2. ІНТЕГРАЦІЯ МЕСЕНДЖЕРІВ ТА ВІДПРАВКА ФОРМИ
+    const channelButtons = document.querySelectorAll(".channel-btn");
+    const submitBtn = document.getElementById("submitBtn");
+    let selectedChannel = "whatsapp"; // Канал за замовчуванням
 
-            if (!isVisible) {
-                body.style.display = "block";
-                header.querySelector("span").textContent = "-";
-            }
+    // Номер телефону студії для месенджерів (вкажіть ваш робочий мобільний у форматі без знака +)
+    const studioPhone = "390321611619"; 
+    const studioTelegramUser = "username_da_inserire"; // Сюди можна буде вписати нік телеграм
+    const studioEmail = "segreteria@studiobroggimazzini.eu";
+
+    channelButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            channelButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+            
+            selectedChannel = button.getAttribute("data-channel");
+            // Змінюємо текст на головній кнопці залежно від вибору
+            const formattedChannel = selectedChannel.charAt(0).toUpperCase() + selectedChannel.slice(1);
+            submitBtn.textContent = `Invia tramite ${formattedChannel}`;
         });
     });
 
-    // 3. SMART ASSISTANT CHATBOT
-    const botToggle = document.getElementById("botToggle");
-    const botWindow = document.getElementById("botWindow");
-    const closeBot = document.getElementById("closeBot");
-    const botMessages = document.getElementById("botMessages");
-    const botOptions = document.getElementById("botOptions");
+    if (submitBtn) {
+        submitBtn.addEventListener("click", () => {
+            const name = document.getElementById("name").value.trim();
+            const area = document.getElementById("area").value;
+            const urgency = document.getElementById("urgency").value;
+            const message = document.getElementById("message").value.trim();
 
-    if(botToggle && botWindow && closeBot) {
-        botToggle.addEventListener("click", () => botWindow.classList.toggle("active"));
-        closeBot.addEventListener("click", () => botWindow.classList.remove("active"));
+            if (!name || !message) {
+                alert("Per favore, compila tutti i campi obbligatori (Nome e Descrizione).");
+                return;
+            }
 
-        botOptions.addEventListener("click", (e) => {
-            if (!e.target.classList.contains("option-btn")) return;
-            const choiceText = e.target.textContent;
-            const nextStep = e.target.getAttribute("data-next");
+            // Формуємо красивий текст повідомлення для адвокатів
+            const textTemplate = `Richiesta Contatto - Studio Legale\n\n` +
+                                 `• Nome: ${name}\n` +
+                                 `• Area: ${area}\n` +
+                                 `• Urgenza: ${urgency}\n` +
+                                 `• Dettagli: ${message}`;
 
-            const userMsg = document.createElement("div");
-            userMsg.className = "msg user-msg";
-            userMsg.textContent = choiceText;
-            botMessages.appendChild(userMsg);
-            botOptions.style.display = "none";
+            const encodedText = encodeURIComponent(textTemplate);
 
-            setTimeout(() => {
-                const reply = document.createElement("div");
-                reply.className = "msg bot-msg";
-                if(nextStep === "civile") {
-                    reply.innerHTML = "Lo Studio ha una profonda esperienza in contratti, risarcimento danni e diritto familiare. Vi consigliamo di richiedere un incontro compilando il modulo qui sotto.";
-                } else if(nextStep === "tributario") {
-                    reply.innerHTML = "Per questioni fiscali analizziamo avvisi di accertamento e cartelle. Compila il nostro modulo per inviare i dettagli alla segreteria.";
-                } else {
-                    reply.innerHTML = "Seguiamo le ristrutturazioni societarie e i piani di rientro. Richiedi subito un appuntamento scorrendo il sito.";
-                }
-                botMessages.appendChild(reply);
-                botMessages.scrollTop = botMessages.scrollHeight;
-            }, 800);
+            // Виконуємо дію залежно від обраного каналу
+            if (selectedChannel === "whatsapp") {
+                window.open(`https://wa.me/${studioPhone}?text=${encodedText}`, "_blank");
+            } else if (selectedChannel === "telegram") {
+                window.open(`https://t.me/${studioTelegramUser}?text=${encodedText}`, "_blank");
+            } else if (selectedChannel === "viber") {
+                window.open(`viber://forward?text=${encodedText}`, "_blank");
+            } else if (selectedChannel === "email") {
+                window.location.href = `mailto:${studioEmail}?subject=Richiesta%20Assistenza%20Legale&body=${encodedText}`;
+            }
         });
     }
 });

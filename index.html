@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio Legal Associato Broggi e Mazzini | Novara</title>
+    <title>Studio Legale Associato Broggi e Mazzini | Novara</title>
     <meta name="description" content="Studio Legale Associato degli Avvocati Antonio Broggi e Paolo Mazzini a Novara. Assistenza e consulenza legale qualificata in diritto civile, tributario, di famiglia e fallimentare.">
     
     <!-- Google Fonts Connection -->
@@ -13,15 +13,39 @@
     
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="./style.css">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      "name": "Studio Legale Associato Avvocati Broggi e Mazzini",
+      "image": "https://raw.githubusercontent.com/Antonygrou/avocato/main/advocati.png",
+      "telephone": "+390321611619",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Corso Felice Cavallotti 22",
+        "addressLocality": "Novara",
+        "postalCode": "28100",
+        "addressRegion": "NO",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "45.4447",
+        "longitude": "8.6253"
+      }
+    }
+    </script>
 </head>
 <body>
 
-    <!-- Header Navigation (З оригінальним зображенням вивіски) -->
+    <!-- Header Navigation (Повертаємо чисто-білий колір шапки) -->
     <header class="site-header">
         <div class="container header-flex">
             <a href="#" class="logo-img-link">
-                <!-- Підключаємо завантажену вивіску Cattura-654w.webp -->
-                <img src="Cattura-654w.webp" alt="Studio Legale Associato Broggi e Mazzini" class="site-logo-img">
+                <!-- Пряме підключення графічної вивіски без тексту -->
+                <img src="./Cattura-654w.webp" alt="Studio Legale Associato Broggi e Mazzini" class="site-logo-img">
             </a>
             
             <div class="header-actions">
@@ -84,7 +108,7 @@
             <div class="container max-w-md text-center">
                 <h2 class="section-title">Il Nostro Studio</h2>
                 <p class="lead-text">Nato a Novara dal sodalizio professionale tra gli Avvocati <strong>Antonio Broggi</strong> e <strong>Paolo Mazzini</strong>, lo Studio unisce competenze specialistiche maturate in anni di attività autonoma nello stesso edificio.</p>
-                <p style="margin-top: 1.5rem; color: var(--text);">Provenienti da famiglie con una radicata traditione forense, i titolari offrono consulenza legale qualificata e personalizzata. L'approccio dello Studio si basa sul rapporto di fiducia diretto ed esclusivo tra il cliente e l'avvocato, garantendo trasparenza e risposte rapide.</p>
+                <p style="margin-top: 1.5rem; color: var(--text);">Provenienti da famiglie con una radicata tradizione forense, i titolari offrono consulenza legale qualificata e personalizzata. L'approccio dello Studio si basa sul rapporto di fiducia directo ed esclusivo tra il cliente e l'avvocato, garantendo trasparenza e risposte rapide.</p>
             </div>
         </section>
 
@@ -241,7 +265,7 @@
             </div>
         </section>
 
-        <!-- FAQs (ВИПРАВЛЕНО помилку в тексті) -->
+        <!-- FAQs -->
         <section id="faq" class="sections bg-light">
             <div class="container max-w-md">
                 <h2 class="section-title">Domande Frequenti</h2>

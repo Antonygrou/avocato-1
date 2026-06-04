@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. МОБІЛЬНЕ МЕНЮ (БУРГЕР)
+    // 1. MOBILE MENU BURGER
     const burgerBtn = document.getElementById("burgerBtn");
     const navMenu = document.getElementById("navMenu");
 
@@ -8,20 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
         burgerBtn.addEventListener("click", () => {
             navMenu.classList.toggle("active");
         });
-        // Закривати меню при кліку на будь-яке посилання
         document.querySelectorAll(".nav-menu a").forEach(link => {
             link.addEventListener("click", () => navMenu.classList.remove("active"));
         });
     }
 
-    // 2. ІНТЕГРАЦІЯ МЕСЕНДЖЕРІВ ТА ВІДПРАВКА ФОРМИ
+    // 2. MESSENGER ROUTING WITH FORMS
     const channelButtons = document.querySelectorAll(".channel-btn");
     const submitBtn = document.getElementById("submitBtn");
-    let selectedChannel = "whatsapp"; // Канал за замовчуванням
+    let selectedChannel = "whatsapp"; // Значення за замовчуванням
 
-    // Номер телефону студії для месенджерів (вкажіть ваш робочий мобільний у форматі без знака +)
+    // Офіційні дані студії для відправки
     const studioPhone = "390321611619"; 
-    const studioTelegramUser = "username_da_inserire"; // Сюди можна буде вписати нік телеграм
+    const studioTelegramUser = "studiobroggimazzini"; // Сюди можна буде прописати точний нікнейм телеграм
     const studioEmail = "segreteria@studiobroggimazzini.eu";
 
     channelButtons.forEach(button => {
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
             button.classList.add("active");
             
             selectedChannel = button.getAttribute("data-channel");
-            // Змінюємо текст на головній кнопці залежно від вибору
             const formattedChannel = selectedChannel.charAt(0).toUpperCase() + selectedChannel.slice(1);
             submitBtn.textContent = `Invia tramite ${formattedChannel}`;
         });
@@ -48,16 +46,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Формуємо красивий текст повідомлення для адвокатів
-            const textTemplate = `Richiesta Contatto - Studio Legale\n\n` +
-                                 `• Nome: ${name}\n` +
-                                 `• Area: ${area}\n` +
+            // Шаблон листа італійською мовою
+            const textTemplate = `Richiesta Assistenza Legale\n\n` +
+                                 `• Nome e Cognome: ${name}\n` +
+                                 `• Ambito: ${area}\n` +
                                  `• Urgenza: ${urgency}\n` +
-                                 `• Dettagli: ${message}`;
+                                 `• Dettagli del caso: ${message}`;
 
             const encodedText = encodeURIComponent(textTemplate);
 
-            // Виконуємо дію залежно від обраного каналу
+            // Логіка відкриття додатків
             if (selectedChannel === "whatsapp") {
                 window.open(`https://wa.me/${studioPhone}?text=${encodedText}`, "_blank");
             } else if (selectedChannel === "telegram") {
@@ -65,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (selectedChannel === "viber") {
                 window.open(`viber://forward?text=${encodedText}`, "_blank");
             } else if (selectedChannel === "email") {
-                window.location.href = `mailto:${studioEmail}?subject=Richiesta%20Assistenza%20Legale&body=${encodedText}`;
+                window.location.href = `mailto:${studioEmail}?subject=Richiesta%20Contatto%20Studio%20Legale&body=${encodedText}`;
             }
         });
     }

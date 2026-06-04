@@ -1,62 +1,151 @@
+/* ==========================================================================
+   1. DESIGN SYSTEM & VARIABLES (Шрифти та кольори вивіски)
+   ========================================================================== */
 :root {
-    --primary: #1e293b;       /* Шляхетний глибокий темний колір тексту */
-    --accent: #aa8453;        /* Бронзово-золотий відтінок літер з вивіски */
+    --primary: #1e293b;       /* Глибокий графітовий колір тексту */
+    --accent: #aa8453;        /* Бронзово-золотий відтінок з вивіски */
     --bg-light: #f8fafc;
     --white: #ffffff;
     --text: #475569;
     --font-serif: "Cormorant Garamond", "Georgia", serif; 
-    --font-sans: "Plus Jakarta Sans", system-ui, sans-serif; 
+    --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif; 
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ==========================================================================
+   2. BASE RESET & GLOBAL STYLES (Вільний вертикальний скрол)
+   ========================================================================== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-sans); color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { 
+    font-family: var(--font-sans); 
+    color: var(--text); 
+    background: var(--white); 
+    line-height: 1.6; 
+    overflow-x: hidden; 
+    width: 100%; 
+    -webkit-font-smoothing: antialiased; 
+}
 
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.sections { padding: 80px 0; }
+.sections { padding: 80px 0; width: 100%; }
 .bg-light { background-color: var(--bg-light); }
 .bg-white { background-color: var(--white); }
 .text-center { text-align: center; }
 .max-w-md { max-width: 600px; margin: 0 auto; }
 
-h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--primary); font-weight: 700; }
+/* ==========================================================================
+   3. TYPOGRAPHY
+   ========================================================================== */
+h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--primary); font-weight: 700; letter-spacing: -0.5px; }
 .section-title { font-size: 2.5rem; margin-bottom: 15px; text-align: center; }
-.section-subtitle-text { font-size: 1.1rem; color: #64748b; margin-bottom: 40px; font-style: italic; }
+.section-subtitle-text { font-size: 1.1rem; color: #64748b; margin-bottom: 40px; font-style: italic; font-family: var(--font-serif); }
 .form-subtitle { font-size: 0.95rem; color: #64748b; margin-bottom: 25px; line-height: 1.5; }
 
-/* Кнопки */
-.btn { display: inline-block; padding: 12px 26px; border-radius: 4px; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.9rem; border: none; }
+/* ==========================================================================
+   4. BUTTONS & PHONE FIX (Бронзова кнопка без чорноти)
+   ========================================================================== */
+.btn { 
+    display: inline-block; 
+    padding: 12px 26px; 
+    border-radius: 4px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+    font-size: 0.9rem; 
+    border: none;
+    font-family: var(--font-sans);
+}
 .btn-primary { background-color: var(--accent); color: var(--white); }
 .btn-primary:hover { background-color: #8c6639; }
 .btn-secondary { background-color: transparent; border: 1px solid var(--primary); color: var(--primary); }
 .btn-secondary:hover { background-color: var(--primary); color: var(--white); }
 
-/* Фікс кнопки телефону (Бронзово-золота, жодної чорноти) */
+/* Фікс телефонної кнопки у меню */
 .btn-phone { background-color: var(--accent) !important; color: var(--white) !important; font-size: 0.85rem; padding: 10px 18px; }
 .btn-phone:hover { background-color: #8c6639 !important; }
 .btn-full { width: 100%; display: block; font-size: 1rem; padding: 14px; margin-top: 15px; }
 
-/* ШАПКА: ЧИСТИЙ БІЛИЙ ФОН + ТОЧНИЙ СТИЛЬ ЛІТЕР З ВИВІСКИ */
-.site-header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; height: 90px; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+/* ==========================================================================
+   5. SITE HEADER & LUXURY CODE LOGO (Імітація вивіски)
+   ========================================================================== */
+.site-header { 
+    background: #ffffff; 
+    border-bottom: 1px solid #e2e8f0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    height: 100px; 
+    display: flex; 
+    align-items: center; 
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02); 
+}
 .header-flex { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 
-/* Логотип кодом один в один як вивіска */
-.logo { text-decoration: none; display: flex; flex-direction: column; text-align: left; }
-.logo-main { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400; color: var(--primary); line-height: 1.1; letter-spacing: 2.5px; }
-.logo-main span { color: var(--accent); font-weight: 300; }
-.logo-sub { font-family: var(--font-sans); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 3.5px; color: #64748b; margin-top: 5px; font-weight: 600; }
+/* Стиль металевої таблички вивіски */
+.logo { 
+    text-decoration: none; 
+    display: flex; 
+    flex-direction: column; 
+    text-align: left;
+    padding-left: 5px;
+}
+.logo-main { 
+    font-family: var(--font-serif); 
+    font-size: 1.85rem; 
+    font-weight: 500; 
+    color: var(--primary); 
+    line-height: 1.1; 
+    letter-spacing: 4px; 
+    text-transform: uppercase;
+}
+.logo-main .ampersand { 
+    font-family: var(--font-serif);
+    font-size: 1.5rem; 
+    font-weight: 400;
+    font-style: italic; 
+    color: var(--accent); 
+    margin: 0 4px;
+    vertical-align: middle;
+    text-transform: lowercase; 
+}
+.logo-sub { 
+    font-family: var(--font-sans); 
+    font-size: 0.55rem; 
+    font-weight: 600; 
+    color: #64748b; 
+    letter-spacing: 5px; 
+    text-transform: uppercase;
+    margin-top: 7px;
+    line-height: 1;
+}
 
+/* Десктопне навігаційне меню */
 .nav-menu { display: flex; align-items: center; gap: 18px; }
 .nav-menu a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.85rem; transition: color 0.2s; }
 .nav-menu a:hover:not(.btn) { color: var(--accent); }
 
-/* Мобільні елементи керування */
+/* Мобільні елементи керування в шапці */
 .header-actions { display: none; align-items: center; gap: 12px; }
-.btn-phone-icon { width: 40px; height: 40px; background: var(--bg-light); border: 1px solid #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); text-decoration: none; }
+.btn-phone-icon { 
+    width: 40px; 
+    height: 40px; 
+    background: var(--bg-light); 
+    border: 1px solid #e2e8f0; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: var(--accent); 
+    text-decoration: none; 
+}
 .burger { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 5px; }
 .burger span { display: block; width: 22px; height: 2px; background: var(--primary); transition: 0.2s; }
 
-/* HERO */
+/* ==========================================================================
+   6. HERO SECTION
+   ========================================================================== */
 .hero { padding: 60px 0; background: #fafafa; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
 .hero-subtitle-tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 8px; display: block; }
@@ -72,18 +161,24 @@ h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--primary); font-wei
 .hero-image { width: 100%; max-width: 480px; height: 360px; border-radius: 4px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
 .hero-image img { width: 100%; height: 100%; object-fit: cover; }
 
-/* FAQ (ВІДНОВЛЕНО ТА СТИЛІЗОВАНО) */
-.accordion-item { background: var(--white); margin-bottom: 15px; border-radius: 4px; border: 1px solid #e2e8f0; overflow: hidden; }
-.accordion-header { width: 100%; padding: 18px 20px; text-align: left; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary); display: flex; justify-content: space-between; cursor: pointer; align-items: center; font-family: var(--font-serif); outline: none; appearance: none; }
-.accordion-header:focus { background-color: var(--bg-light); }
-.accordion-toggle-icon { font-size: 1.2rem; color: var(--accent); font-weight: bold; }
-.accordion-body { padding: 0 20px 20px 20px; display: none; color: var(--text); font-size: 0.95rem; line-height: 1.5; }
-
-/* ІНШІ СЕКЦІЇ ТА СІТКИ */
+/* ==========================================================================
+   7. PARTNER PROFILES & GRID SYSTEMS
+   ========================================================================== */
 .grid-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-.partner-card { background: #fff; padding: 30px; border-radius: 4px; border: 1px solid #e2e8f0; }
+.partner-card { background: #fff; padding: 30px; border-radius: 4px; border: 1px solid #e2e8f0; text-align: left; }
 .partner-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-.partner-avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--accent); }
+.partner-avatar-placeholder { 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%; 
+    background: var(--primary); 
+    color: #fff; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    border: 2px solid var(--accent); 
+}
 .partner-subtitle { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; display: block; }
 .partner-bio { font-style: italic; font-size: 0.9rem; margin-bottom: 12px; color: #64748b; }
 .partner-details { list-style: none; font-size: 0.85rem; }
@@ -98,7 +193,9 @@ h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--primary); font-wei
 .case-badge { font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 5px; }
 .case-stat { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--accent); }
 
-/* FORM & MESSENGERS */
+/* ==========================================================================
+   8. APPOINTMENT FORM & MESSENGERS
+   ========================================================================== */
 .appointment-form { background: #fff; padding: 30px; border-radius: 4px; border: 1px solid #e2e8f0; }
 .form-group { margin-bottom: 15px; display: flex; flex-direction: column; text-align: left; }
 .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; }
@@ -111,23 +208,76 @@ h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--primary); font-wei
 .channel-btn { padding: 10px; background: var(--bg-light); border: 1px solid #e2e8f0; border-radius: 4px; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; }
 .channel-btn.active, .channel-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
+/* ==========================================================================
+   9. FAQ ACCORDION FIX (Повне відновлення кнопок та оформлення)
+   ========================================================================== */
+.accordion-item { background: var(--white); margin-bottom: 15px; border-radius: 4px; border: 1px solid #e2e8f0; overflow: hidden; }
+.accordion-header { 
+    width: 100%; 
+    padding: 18px 20px; 
+    text-align: left; 
+    background: none; 
+    border: none; 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    color: var(--primary); 
+    display: flex; 
+    justify-content: space-between; 
+    cursor: pointer; 
+    align-items: center; 
+    font-family: var(--font-serif); 
+    outline: none; 
+    appearance: none; 
+    -webkit-appearance: none;
+}
+.accordion-header:focus { background-color: var(--bg-light); }
+.accordion-toggle-icon { font-size: 1.2rem; color: var(--accent); font-weight: bold; }
+.accordion-body { padding: 0 20px 20px 20px; display: none; color: var(--text); font-size: 0.95rem; line-height: 1.5; }
+
+/* ==========================================================================
+   10. CONTACTS & FOOTER
+   ========================================================================== */
 .grid-contacts { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 30px; }
+.contact-info { text-align: left; }
+.contact-map iframe { width: 100%; border: 0; border-radius: 4px; }
 .site-footer { padding: 25px 0; border-top: 1px solid #e2e8f0; font-size: 0.8rem; color: #94a3b8; }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   11. RESPONSIVE MEDIA QUERIES (Сувора мобільна оптимізація)
+   ========================================================================== */
 @media (max-width: 992px) {
     .header-actions { display: flex; }
     .site-header { height: 85px; }
     
-    .nav-menu { display: none; position: absolute; top: 85px; left: 0; width: 100%; background: #fff; flex-direction: column; padding: 20px; gap: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-bottom: 1px solid #e2e8f0; }
+    /* Мобільне меню */
+    .nav-menu { 
+        display: none; 
+        position: absolute; 
+        top: 85px; 
+        left: 0; 
+        width: 100%; 
+        background: #fff; 
+        flex-direction: column; 
+        padding: 20px; 
+        gap: 0; 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+        border-bottom: 1px solid #e2e8f0; 
+    }
     .nav-menu.active { display: flex; }
-    .nav-menu a { width: 100%; padding: 15px 0; font-size: 1rem; border-bottom: 1px solid #f1f5f9; }
+    .nav-menu a { width: 100%; padding: 15px 0; font-size: 1rem; border-bottom: 1px solid #f1f5f9; text-align: left; }
     .nav-menu .btn-phone { display: block; margin-top: 15px; text-align: center; width: 100%; }
     
-    .hero-grid, .grid-partners, .grid-cards, .grid-cases, .grid-contacts, .form-row, .messenger-buttons-grid { grid-template-columns: 1fr; gap: 20px; }
+    /* Перебудова всіх сіток у мобільний один стовпчик */
+    .hero-grid, .grid-partners, .grid-cards, .grid-cases, .grid-contacts, .form-row, .messenger-buttons-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+    }
     .hero-text { text-align: center; }
     .hero-buttons, .hero-stats { justify-content: center; }
     .hero-text h1 { font-size: 2.2rem; }
-    .logo-main { font-size: 1.3rem; letter-spacing: 2px; }
-    .logo-sub { letter-spacing: 2.2px; font-size: 0.55rem; }
+    
+    /* Ювелірне зменшення вивіски на екранах смартфонів */
+    .logo-main { font-size: 1.45rem; letter-spacing: 2.5px; }
+    .logo-main .ampersand { font-size: 1.2rem; margin: 0 2px; }
+    .logo-sub { font-size: 0.48rem; letter-spacing: 3.5px; margin-top: 5px; }
 }
